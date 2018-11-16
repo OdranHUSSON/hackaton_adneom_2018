@@ -33,7 +33,12 @@ class User extends Authenticatable
      */
     public function success()
     {
-        return $this->belongsToMany(Success::class)->withTimestamps();
+        return $this->belongsToMany(
+            Success::class,
+            'users_success',
+            'users_id',
+            'success_id'
+        )->withTimestamps();
     }
 
     /**
@@ -41,7 +46,25 @@ class User extends Authenticatable
      */
     public function tasks()
     {
-        return $this->belongsToMany(tasks::class);
+        return $this->belongsToMany(
+            tasks::class,
+            'users_tasks',
+            'users_id',
+            'tasks_id'
+        )->withTimestamps();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function levels()
+    {
+        return $this->belongsToMany(
+            Level::class,
+            'users_levels',
+            'users_id',
+            'levels_id'
+        )->withTimestamps();
     }
 
     /**

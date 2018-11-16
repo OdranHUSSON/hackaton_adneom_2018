@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Success;
 use App\task_category;
-use Illuminate\Http\Request;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -27,9 +27,11 @@ class HomeController extends Controller
     {
         $taskCategory = task_category::all();
         $success = Success::all();
+        $users = User::all();
 
         return view('home')
             ->with('taskCategory', $taskCategory)
-            ->with('success', $success);
+            ->with('success', $success)
+            ->with('users', $users);
     }
 }

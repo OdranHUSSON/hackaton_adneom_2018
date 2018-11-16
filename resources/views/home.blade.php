@@ -23,6 +23,11 @@
                     <p>Succès</p>
                     @include('success/index')
                 </div>
+
+                <div class="card-body">
+                    <p>Utilisateurs</p>
+                    @include('user/index')
+                </div>
             </div>
         </div>
     </div>

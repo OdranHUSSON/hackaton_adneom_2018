@@ -22,7 +22,7 @@ class Success extends Model
         return $this->belongsToMany(
             User::class,
             'users_success',
-            null,
+            'success_id',
             'users_id'
         )->withTimestamps();
     }

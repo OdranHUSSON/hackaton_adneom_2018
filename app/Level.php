@@ -3,19 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class tasks extends Model
+/**
+ * Class Level
+ *
+ * @package App
+ */
+class Level extends Model
 {
-    protected $table = 'tasks';
-
-    /**
-     * @return BelongsTo
-     */
-    public function task_category() {
-        return $this->belongsTo('App\tasks');
-    }
+    protected $table = 'levels';
 
     /**
      * @return BelongsToMany
@@ -24,8 +21,8 @@ class tasks extends Model
     {
         return $this->belongsToMany(
             User::class,
-            'users_tasks',
-            'tasks_id',
+            'users_levels',
+            'levels_id',
             'users_id'
         )->withTimestamps();
     }
