@@ -43,4 +43,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(tasks::class);
     }
+
+    /**
+     * @return string
+     */
+    public function level() {
+        return "TODO";
+    }
 }
