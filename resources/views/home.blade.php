@@ -14,8 +14,8 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    
-                    <p> Catégories</p>
+
+                    <p>Catégories</p>
                     @include('tasks/index')
 
                 </div>

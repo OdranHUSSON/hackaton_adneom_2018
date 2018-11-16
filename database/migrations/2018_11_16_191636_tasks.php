@@ -47,6 +47,7 @@ class Tasks extends Migration
             )
         );
 
+
         DB::table('task_category')->insert(
             array(
                 'label' => 'Achats alimentaires',
