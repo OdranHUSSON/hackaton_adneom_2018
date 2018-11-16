@@ -11,9 +11,9 @@
                         <h1>Mes infos</h1>
                         <p>{{ $user->name }}</p>
                         <p>{{ $user->experience }} XP</p>
-                        <p>{{ $user->level() }}</p>
+                        <p>{{ $user->levels->last() ? $user->levels->last()->label: '' }}</p>
                         <h1>Mes succès</h1>
-                        <p>TODO</p>
+                        @include('success/byUser')
                     </div>
                 </div>
             </div>

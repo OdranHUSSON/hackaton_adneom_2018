@@ -66,11 +66,4 @@ class User extends Authenticatable
             'levels_id'
         )->withTimestamps();
     }
-
-    /**
-     * @return string
-     */
-    public function level() {
-        return "TODO";
-    }
 }
