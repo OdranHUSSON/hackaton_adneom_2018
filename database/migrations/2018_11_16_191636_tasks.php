@@ -16,15 +16,15 @@ class Tasks extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('label');
-            $table->string('description');
-            $table->integer('type')->nullable();
+            $table->text('description');
+            $table->integer('type')->default(0);
             $table->timestamps();
         });
 
         Schema::create('task_category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('label');
-            $table->string('description');
+            $table->text('description');
             $table->integer('type')->nullable();
             $table->unsignedInteger('task_id')->nullable();
             $table->foreign('task_id')->references('id')->on('tasks');
