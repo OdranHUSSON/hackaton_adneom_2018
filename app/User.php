@@ -2,8 +2,8 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -27,4 +27,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * @return BelongsToMany
+     */
+    public function success()
+    {
+        return $this->belongsToMany(Success::class)->withTimestamps();
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function tasks()
+    {
+        return $this->belongsToMany(tasks::class);
+    }
 }
