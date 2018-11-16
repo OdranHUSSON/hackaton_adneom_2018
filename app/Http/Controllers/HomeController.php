@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Success;
 use App\task_category;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,10 @@ class HomeController extends Controller
     public function index()
     {
         $taskCategory = task_category::all();
+        $success = Success::all();
+
         return view('home')
-            ->with('taskCategory', $taskCategory);
+            ->with('taskCategory', $taskCategory)
+            ->with('success', $success);
     }
 }

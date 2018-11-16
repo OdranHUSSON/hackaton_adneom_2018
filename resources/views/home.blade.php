@@ -17,7 +17,11 @@
 
                     <p>Catégories</p>
                     @include('tasks/index')
+                </div>
 
+                <div class="card-body">
+                    <p>Succès</p>
+                    @include('success/index')
                 </div>
             </div>
         </div>
