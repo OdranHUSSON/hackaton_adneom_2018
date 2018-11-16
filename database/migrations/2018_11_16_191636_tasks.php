@@ -13,23 +13,67 @@ class Tasks extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('label');
-            $table->text('description');
-            $table->integer('type')->default(0);
-            $table->timestamps();
-        });
-
         Schema::create('task_category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('label');
             $table->text('description');
             $table->integer('type')->nullable();
-            $table->unsignedInteger('task_id')->nullable();
-            $table->foreign('task_id')->references('id')->on('tasks');
             $table->timestamps();
         });
+
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('label');
+            $table->text('description');
+            $table->unsignedInteger('task_category_id')->nullable();
+            $table->foreign('task_category_id')->references('id')->on('task_category');
+            $table->integer('type')->default(0);
+            $table->timestamps();
+        });
+
+        // Populate db
+
+        DB::table('task_category')->insert(
+            array(
+                'label' => 'Recyclage',
+                'description' => 'Recyclage'
+            )
+        );
+
+        DB::table('task_category')->insert(
+            array(
+                'label' => 'Transport',
+                'description' => 'Transport'
+            )
+        );
+
+        DB::table('task_category')->insert(
+            array(
+                'label' => 'Achats alimentaires',
+                'description' => 'Achats alimentaires'
+            )
+        );
+
+        DB::table('task_category')->insert(
+            array(
+                'label' => 'Anti gaspi (écono-logie)',
+                'description' => 'Anti gaspi (écono-logie)'
+            )
+        );
+
+        DB::table('task_category')->insert(
+            array(
+                'label' => 'Enfants',
+                'description' => 'Enfants'
+            )
+        );
+
+        DB::table('task_category')->insert(
+            array(
+                'label' => 'Habitation',
+                'description' => 'Habitation'
+            )
+        );
     }
 
     /**
@@ -39,7 +83,7 @@ class Tasks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_category');
         Schema::dropIfExists('tasks');
+        Schema::dropIfExists('task_category');
     }
 }
