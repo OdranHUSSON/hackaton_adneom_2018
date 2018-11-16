@@ -19,3 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/me', 'UserController@me')->name('me');
+
+Route::get('/category/{id}', 'TaskCategoryController@fetchOne')->name('Show one category');
