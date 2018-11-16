@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  mariadb:
+    image: mariadb:10.3.7
+    container_name: verdailleurs-mariadb
+    volumes:
+    - ./docker/data/mariadb:/var/lib/mariadb
+    environment:
+      MYSQL_DATABASE: verdailleurs
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PORT: 3306
+    networks:
+    - verdailleurs_network
+
+  nginx:
+    image: nginx
+    container_name: verdailleurs-nginx
+    ports:
+    - 80
+    volumes:
+    - ./public:/var/www/html/public
+    - ./docker/nginx/site.conf:/etc/nginx/conf.d/site.conf
+    networks:
+      verdailleurs_network:
+        ipv4_address: 172.16.239.10
+
+  php:
+    build: docker/php
+    container_name: verdailleurs-php
+    volumes:
+    - ./:/var/www/html
+    networks:
+    - verdailleurs_network
+
+networks:
+  verdailleurs_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.16.239.0/24
