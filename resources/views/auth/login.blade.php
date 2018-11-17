@@ -16,8 +16,8 @@
         @csrf
 
         <div class="field form-group">
-            <label for="id">{{ __('E-Mail Address') }}</label>
-            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="text" id="id" name="username" placeholder="Enter your username" required>
+            <label for="email">{{ __('E-Mail Address') }}</label>
+            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="text" id="email" name="email" placeholder="Enter your username" required>
 
             @if ($errors->has('email'))
                 <span class="invalid-feedback" role="alert">
@@ -27,8 +27,8 @@
         </div>
 
         <div class="field form-group">
-            <label for="pwd">{{ __('Password') }}</label>
-            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="password" id="pwd" name="password" placeholder="Enter your password" required>
+            <label for="password">{{ __('Password') }}</label>
+            <input class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="password" id="password" name="password" placeholder="Enter your password" required>
 
             @if ($errors->has('password'))
                 <span class="invalid-feedback" role="alert">

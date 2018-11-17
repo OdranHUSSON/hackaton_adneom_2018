@@ -38,7 +38,7 @@
 
     <div class="field form-group">
         <label for="password">{{ __('Password') }}</label>
-        <input id="password" type="text" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password') }}" placeholder="Enter your password">
+        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" value="{{ old('password') }}" placeholder="Enter your password">
 
         @if ($errors->has('password'))
             <span class="invalid-feedback" role="alert">
@@ -49,7 +49,7 @@
 
     <div class="field form-group">
         <label for="password-confirm">{{ __('Confirm Password') }}</label>
-        <input id="password-confirm" type="text" class="form-control{{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" name="name" value="{{ old('password-confirm') }}" placeholder="Confirm your password">
+        <input id="password-confirm" type="password" class="form-control{{ $errors->has('password-confirm') ? ' is-invalid' : '' }}" name="password-confirm" value="{{ old('password-confirm') }}" placeholder="Confirm your password">
 
         @if ($errors->has('password-confirm'))
             <span class="invalid-feedback" role="alert">
