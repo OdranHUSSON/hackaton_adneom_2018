@@ -12,10 +12,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 </head>
 <body>
-<div class="page">
+<div class="page @yield('page-class')">
     <div class="navigation-interaction">
         <a class="back-button" href="/home"><i class="material-icons">keyboard_arrow_left</i></a>
-        <a class="settings-button" href="#"><i class="material-icons">more_horiz</i></a>
+        <div class="dropdown">
+            <button class="material-icons settings-button">more_horiz</button>
+            <ul class="dropdown-list">
+                <li><a href="./users.html"><i class="material-icons">account_circle</i>My account</a></li>
+                <li><a href="./logout.html"><i class="material-icons">highlight_off</i>Logout</a></li>
+            </ul>
+        </div>
     </div>
     <header id="header" class="page-title">
         <h1>
@@ -23,9 +29,9 @@
         </h1>
     </header>
 </div>
-    <main id="main">
-        @yield('content')
-    </main>
-
+<main id="main">
+    @yield('content')
+</main>
+<script src="{{ asset('js/menu.js') }}" defer></script>
 </body>
 </html>
