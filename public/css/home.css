@@ -2,12 +2,19 @@
   background-image: url('../img/background-eoliene.jpg');
   min-height: 100vh;
 }
+
 .navigation-interaction .back-button {
   display: none;
 }
+
+.category-index {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 .category {
   width: 28%;
-  display: inline-block;
+  display: flex;
   margin: 2%;
 }
 
@@ -16,7 +23,8 @@
   background: rgba(255,255,255, 0.5);
   padding: 1rem;
   box-sizing: border-box;
-  display: block;
+  display: flex;
+  flex-direction: column;
   color: #000;
 }
 
@@ -29,19 +37,24 @@
 .category img {
   display: block;
   max-width: 70%;
+  margin: auto;
+}
+
+.category .category-label {
+  margin: auto;
 }
 
 @media (min-width: 600px) {
   .category {
     width: 20%;
-    display: inline-block;
+    display: flex;
     margin: 2%;
   }
 }
 @media (min-width: 1000px) {
   .category {
     width: 15%;
-    display: inline-block;
+    display: flex;
     margin: 2%;
   }
 }

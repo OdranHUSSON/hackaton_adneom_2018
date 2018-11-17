@@ -21,7 +21,6 @@
             </div>
         @endif
 
-        <section class="category-index">
             @foreach($taskCategory as $category)
                 <article class="category">
                     <a href="/category/{{ $category->id }}" class="link">
@@ -34,7 +33,6 @@
                     </a>
                 </article>
             @endforeach
-        </section>
     </section>
 
 @endsection
