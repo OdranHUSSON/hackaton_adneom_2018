@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.mobile')
 
 @section('page-title')
     Accueil

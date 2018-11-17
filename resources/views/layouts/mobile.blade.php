@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <script src="{{ asset('js/sweetalert2.all.min.js') }}" defer></script>
 </head>
 <body>
 <div class="page @yield('page-class')">
