@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Filter;
+use App\Level;
 use App\Success;
 use App\tasks;
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class TaskController extends Controller
 {
@@ -27,8 +27,14 @@ class TaskController extends Controller
         $user->save();
 
         $successResult = $this->executeSuccessFilters($user);
+        $levelResult = $this->manageUserLevel($user);
 
-        return response(json_encode($successResult), 200)
+        $result = [
+            'success' => $successResult,
+            'level' => $levelResult,
+        ];
+
+        return response(json_encode($result), 200)
             ->header('Content-Type', 'application/json');
     }
 
@@ -46,8 +52,15 @@ class TaskController extends Controller
         $user->save();
 
         $successResult = $this->executeSuccessFilters($user);
+        $levelResult = $this->manageUserLevel($user);
 
-        return response(json_encode($successResult), 200)
+        $result = [
+            'success' => $successResult,
+            'level' => $levelResult,
+        ];
+
+
+        return response(json_encode($result), 200)
             ->header('Content-Type', 'application/json');
     }
 
@@ -122,5 +135,36 @@ class TaskController extends Controller
         }
 
         return $checkCount === null ? $query->exists(): $query->count() >= $checkCount;
+    }
+
+    /**
+     * @param User $user
+     *
+     * @return array
+     */
+    protected function manageUserLevel(User $user)
+    {
+        $neededLevels = Level::query()->where('required_experience', '<=', $user->experience)->get();
+        $removedLevel = [];
+        $addedLevel = [];
+
+        foreach ($user->levels as $level) {
+            if (!$neededLevels->contains($level)) {
+                $user->levels()->detach($level);
+                $removedLevel[] = $level;
+            }
+        }
+
+        foreach ($neededLevels as $level) {
+            if (!$user->levels->contains($level)) {
+                $user->levels()->attach($level);
+                $addedLevel[] = $level;
+            }
+        }
+
+        return [
+            'addedLevel' => $addedLevel,
+            'removedLevel' => $removedLevel,
+        ];
     }
 }

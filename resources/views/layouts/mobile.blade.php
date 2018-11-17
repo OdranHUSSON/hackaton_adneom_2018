@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <script src="{{ asset('js/sweetalert2.all.min.js') }}" defer></script>
+    <script src="{{ asset('js/promise-polyfill.min.js') }}" defer></script>
     <link href="{{ asset('css/global.css') }}" rel="stylesheet">
     <link href="{{ asset('css/tasks.css') }}" rel="stylesheet">
 </head>

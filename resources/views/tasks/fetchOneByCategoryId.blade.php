@@ -31,7 +31,7 @@
         </ul>
     </div>
     <script type="text/javascript">
-        function manageTaskResult(result) {
+        function manageSuccessResult(result, messageStack) {
             var successMessages = result.addedSuccess.map(function (success) {
                 return 'Vous avez déverouillez le succès ' + success.label;
             });
@@ -41,16 +41,58 @@
             });
 
             if (successMessages.length > 0) {
-                var swalPromise = swal('Félicitation !', successMessages.join("<br />"), 'success');
-
-                if (errorMessages.length > 0) {
-                    swalPromise.then(function() {
-                        swal('Mince !', errorMessages.join("<br />"), 'error')
-                    });
-                }
-            } else if (errorMessages.length > 0) {
-                swal('Mince !', errorMessages.join("<br />"), 'error');
+                messageStack.success.push(successMessages.join("<br />"));
             }
+
+            if (errorMessages.length > 0) {
+                messageStack.fail.push(errorMessages.join("<br />"));
+            }
+        }
+
+        function manageLevelResult(result, messageStack) {
+            var successMessages = result.addedLevel.map(function (level) {
+                return 'Vous avez gagnez le niveau ' + level.label;
+            });
+
+            var errorMessages = result.removedLevel.map(function (level) {
+                return 'Vous avez perdu le niveau ' + level.label;
+            });
+
+            if (successMessages.length > 0) {
+                messageStack.success.push(successMessages.join("<br />"));
+            }
+
+            if (errorMessages.length > 0) {
+                messageStack.fail.push(errorMessages.join("<br />"));
+            }
+        }
+
+        function showMessages(messages, title, type) {
+            if (messages.length === 0) {
+                return new Promise(function(resolve) {
+                    resolve();
+                })
+            }
+
+            var message = messages.shift();
+
+            return swal(title, message, type).then(function () {
+                return showMessages(messages, title, type);
+            });
+        }
+
+        function manageTaskResult(result) {
+            var messageStack = {
+                success: [],
+                fail: []
+            };
+
+            manageSuccessResult(result.success, messageStack);
+            manageLevelResult(result.level, messageStack);
+
+            showMessages(messageStack.success, 'Félicitations !', 'success').then(function () {
+                return showMessages(messageStack.fail, 'Mince !', 'error');
+            });
         }
 
         $(document).ready(function() {
