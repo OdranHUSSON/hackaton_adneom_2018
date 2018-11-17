@@ -13,11 +13,22 @@
                         <h2>Tâches de la catégorie</h2>
 
                         @foreach($taskCategory->tasks as $task)
-                            <p>{{ $task->label }}</p>
+                            <li><a href="#" class="task {{ $task->isDone() }}" task-id="{{ $task->id }}">{{ $task->label }} </a></li>
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on("click", ".task", function() {
+                $.get( "/task/check/"+$(this).attr('task-id'), function(data) {
+                    if(data=="Ok") {
+                        $(this).addClass('is--done');
+                    }
+                });
+            })
+        })
+    </script>
 @endsection
