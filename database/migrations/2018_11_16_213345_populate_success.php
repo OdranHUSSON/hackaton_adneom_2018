@@ -23,6 +23,30 @@ class PopulateSuccess extends Migration
             'xp' => 90,
             'description' => 'Réussir totues les tâches de recyclage',
         ]);
+
+        DB::table('success')->insert([
+            'label' => '5 tâches',
+            'xp' => 10,
+            'description' => 'Réussir 5 tâches',
+        ]);
+
+        DB::table('success')->insert([
+            'label' => '10 tâches',
+            'xp' => 20,
+            'description' => 'Réussir 10 tâches',
+        ]);
+
+        DB::table('success')->insert([
+            'label' => '20 tâches',
+            'xp' => 40,
+            'description' => 'Réussir 20 tâches',
+        ]);
+
+        DB::table('success')->insert([
+            'label' => '50 tâches',
+            'xp' => 100,
+            'description' => 'Réussir 50 tâches',
+        ]);
     }
 
     /**
