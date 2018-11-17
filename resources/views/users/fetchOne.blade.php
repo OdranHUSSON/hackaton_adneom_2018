@@ -8,12 +8,12 @@
                     <div class="card-header">{{ $user->name }}</div>
 
                     <div class="card-body">
-                        <h1>Informations</h1>
+                        <h1>Mes infos</h1>
                         <p>{{ $user->name }}</p>
                         <p>{{ $user->experience }} XP</p>
-                        <p>{{ $user->level() }}</p>
-                        <h1>Succès</h1>
-                        <p>TODO</p>
+                        <p>{{ $user->levels->last() ? $user->levels->last()->label: '' }}</p>
+                        <h1>Mes succès</h1>
+                        @include('success/byUser')
                     </div>
                 </div>
             </div>
