@@ -1,0 +1,118 @@
+.page {
+  background: none;
+}
+
+.background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.page-title h1 {
+  max-width: 53%;
+  display: inline-block;
+}
+
+.page-title {
+  overflow: auto;
+}
+
+.page-title .stats {
+  width: 45%;
+  display: inline-block;
+  vertical-align: top;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.5rem;
+  box-sizing: border-box;
+  float: right;
+  text-align: right;
+}
+
+@media (min-width: 450px) {
+  .page-title .stats {
+    width: auto;
+  }
+}
+.page-title .stats span {
+  display: block;
+}
+
+.page-title .social-share button {
+  background: url('../img/spritesocial.png');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 0;
+  height: 26px;
+  width: 31px;
+}
+
+.page-title .social-share .linkedin {
+  background-position: 0 0;
+}
+.page-title .social-share .facebook {
+  background-position: -31px 0;
+}
+.page-title .social-share .twitter {
+  background-position: -62px 0;
+}
+
+.progressbar {
+  text-align: center;
+}
+
+.progressbar .rank {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.content {
+  position: relative;
+  color: #000;
+  z-index: 1;
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+
+.content:before {
+  content: '';
+  position: absolute;
+  left: -500rem;
+  right: -500rem;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.success {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.success li {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+  position: relative;
+  padding-right: 3rem;
+  color: #000;
+}
+
+.success i {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: green;
+}

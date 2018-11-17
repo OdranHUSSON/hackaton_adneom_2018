@@ -17,13 +17,14 @@
 </head>
 <body>
 <div class="page @yield('page-class')">
+    @yield('background-image')
     <div class="navigation-interaction">
-        <a class="back-button" href="/home"><i class="material-icons">keyboard_arrow_left</i></a>
+        <a class="back-button" href="{{ route('home') }}"><i class="material-icons">keyboard_arrow_left</i></a>
         <div class="dropdown">
             <button class="material-icons settings-button">more_horiz</button>
             <ul class="dropdown-list">
-                <li><a href="./users.html"><i class="material-icons">account_circle</i>My account</a></li>
-                <li><a href="./logout.html"><i class="material-icons">highlight_off</i>Logout</a></li>
+                <li><a href="{{ route('me') }}"><i class="material-icons">account_circle</i>My account</a></li>
+                <li><a href="{{ route('logout') }}"><i class="material-icons">highlight_off</i>Logout</a></li>
             </ul>
         </div>
     </div>
@@ -31,6 +32,7 @@
         <h1>
             @yield('page-title')
         </h1>
+        @yield('header')
     </header>
     <main id="main">
         @yield('content')
