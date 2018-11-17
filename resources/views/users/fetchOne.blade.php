@@ -35,7 +35,7 @@
         @endif
     </section>
     <section class="content is-expanded">
-        <h2> Last success </h2>
+        <h2> Dernier succès </h2>
         <ul class="success">
             @foreach($user->success()->orderBy('users_success.created_at')->get() as $success)
                 <li class='is--done'>{{ $success->label }}<i class="material-icons">check</i></li>
