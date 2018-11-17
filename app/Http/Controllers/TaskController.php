@@ -20,7 +20,7 @@ class TaskController extends Controller
     public function attachTask($id) {
         $this->middleware('auth');
         $task = tasks::findOrFail($id);
-        
+
         Auth::user()->tasks()->attach($id);
         $user = Auth::user();
         $user->experience += $task->experience;
@@ -56,12 +56,10 @@ class TaskController extends Controller
      */
     protected function executeSuccessFilters(User $user)
     {
-        $notMadeSuccess = Success::whereDoesntHave('users', function($query) use ($user) {
-            $query->where('id', $user->id);
-        })->get();
+        $successList = Success::all();
 
         /** @var Success $success */
-        foreach ($notMadeSuccess as $success) {
+        foreach ($successList as $success) {
             $allFilterPass = true;
 
             foreach ($success->filters as $filter) {
@@ -71,8 +69,10 @@ class TaskController extends Controller
                 }
             }
 
-            if ($allFilterPass) {
+            if ($allFilterPass && !$user->success->contains($success)) {
                 $user->success()->attach($success);
+            } else if(!$allFilterPass && $user->success->contains($success)) {
+                $user->success()->detach($success);
             }
         }
     }
