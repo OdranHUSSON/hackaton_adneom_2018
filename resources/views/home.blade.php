@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.mobile')
 
 @section('page-title')
     Accueil
@@ -6,6 +6,10 @@
 
 @section('page-class')
     page-eoliene
+@endsection
+
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/home.css') }}">
 @endsection
 
 @section('content')
@@ -17,7 +21,8 @@
             </div>
         @endif
 
-        @foreach($taskCategory as $category)
+        <section class="category-index">
+            @foreach($taskCategory as $category)
                 <article class="category">
                     <a href="/category/{{ $category->id }}" class="link">
                         @if (file_exists(public_path('img/category/'.$category->id.'.png')))
@@ -28,7 +33,8 @@
                         <span class="category-label">{{ $category->label }}</span>
                     </a>
                 </article>
-        @endforeach
+            @endforeach
+        </section>
     </section>
 
 @endsection
