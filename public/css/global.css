@@ -13,6 +13,18 @@ body {
   overflow: hidden;
 }
 
+.page-habitation {
+  background-image: url('../img/background-house.jpg');
+}
+
+.page-transport {
+  background-image: url('../img/background-bus.jpg');
+}
+
+.page-achats-alimentaires {
+  background-image: url('../img/background-fruits.jpg');
+}
+
 a {
   color: blue;
 }

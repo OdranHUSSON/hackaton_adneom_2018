@@ -14,4 +14,11 @@ class task_category extends Model
     public function tasks() {
         return $this->hasMany('App\tasks');
     }
+
+    /**
+     * @return string
+     */
+    public function preparedlabel() {
+        return str_replace(' ','-',strtolower($this->label));
+    }
 }

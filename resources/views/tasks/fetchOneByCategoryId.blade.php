@@ -1,5 +1,9 @@
 @extends('layouts.mobile')
 
+
+@section('page-class')
+    page-{{$taskCategory->preparedlabel() }}
+@endsection
 @section('page-title')
     {{$taskCategory->label }}
 @endsection
@@ -13,7 +17,11 @@
                 <span clas="category-description">{{ $taskCategory->description }}</span>
             </div>
             <div class="category-image">
-                <img src="../img/themes/recycle.png" alt="">
+                @if (file_exists(public_path('img/category/'.$taskCategory->id.'.png')))
+                    <img src="../img/category/{{  $taskCategory->id }}.png" alt="">
+                @else
+                    <img src="../img/category/1.png">
+                @endif
             </div>
         </div>
         <ul class="tasks">
