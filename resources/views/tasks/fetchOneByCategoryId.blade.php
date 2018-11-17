@@ -1,11 +1,14 @@
 @extends('layouts.mobile')
 
-
 @section('page-class')
     page-{{$taskCategory->preparedlabel() }}
 @endsection
 @section('page-title')
     {{$taskCategory->label }}
+@endsection
+
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/tasks.css') }}">
 @endsection
 
 @section('content')
