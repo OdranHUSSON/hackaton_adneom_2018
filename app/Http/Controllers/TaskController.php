@@ -10,15 +10,16 @@ class TaskController extends Controller
 {
 
     /**
-     * @param Request $id
-     * @return array|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
     public function attachTask($id) {
         $this->middleware('auth');
-
         $task = tasks::findOrFail($id);
         Auth::user()->tasks()->attach($id);
-
+        $user = Auth::user();
+        $user->experience += $task->experience;
+        $user->save();
         return response('Ok', 200)
             ->header('Content-Type', 'text/plain');
     }
