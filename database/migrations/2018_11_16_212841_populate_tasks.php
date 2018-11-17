@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class PopulateTasks extends Migration
 {
@@ -12,6 +14,9 @@ class PopulateTasks extends Migration
      */
     public function up()
     {
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->integer('experience')->default(10);
+        });
         DB::table('tasks')->insert(
             array(
                 'label' => 'J’ai trié mes déchets',
@@ -24,7 +29,8 @@ class PopulateTasks extends Migration
             array(
                 'label' => 'J’ai recyclé des vêtements (dons, les déposer dans des points de collecte)',
                 'description' => 'J’ai recyclé des vêtements (dons, les déposer dans des points de collecte)',
-                'task_category_id' => 1
+                'task_category_id' => 1,
+                'experience' => 20
             )
         );
 
@@ -40,7 +46,8 @@ class PopulateTasks extends Migration
             array(
                 'label' => 'J’ai donné un meuble qui ne me servait plus',
                 'description' => 'J’ai donné un meuble qui ne me servait plus',
-                'task_category_id' => 1
+                'task_category_id' => 1,
+                'experience' => 20
             )
         );
 
@@ -48,7 +55,8 @@ class PopulateTasks extends Migration
             array(
                 'label' => 'J’ai installé un composteur',
                 'description' => 'J’ai installé un composteur',
-                'task_category_id' => 1
+                'task_category_id' => 1,
+                'experience' => 30
             )
         );
 
@@ -67,7 +75,8 @@ class PopulateTasks extends Migration
             array(
                 'label' => 'J’ai laissé ma voiture au garage pour aller au magasin du coin',
                 'description' => 'J’ai laissé ma voiture au garage pour aller au magasin du coin',
-                'task_category_id' => 2
+                'task_category_id' => 2,
+                'experience' => 20
             )
         );
 
@@ -83,7 +92,8 @@ class PopulateTasks extends Migration
             array(
                 'label' => 'Circulation alternée pair/impair',
                 'description' => 'Circulation alternée pair/impair',
-                'task_category_id' => 2
+                'task_category_id' => 2,
+                'experience' => 50
             )
         );
 
@@ -93,7 +103,8 @@ class PopulateTasks extends Migration
             array(
                 'label' => 'J’ai évité les produit contenant du soja ou de la lécithine de soja',
                 'description' => 'J’ai évité les produit contenant du soja ou de la lécithine de soja',
-                'task_category_id' => 3
+                'task_category_id' => 3,
+                'experience' => 300
             )
         );
 
@@ -101,7 +112,8 @@ class PopulateTasks extends Migration
             array(
                 'label' => 'J’ai acheté des légumes de saisons local',
                 'description' => 'Les fraises à Noël ce n’est pas normal',
-                'task_category_id' => 3
+                'task_category_id' => 3,
+                'experience' => 20
             )
         );
 
@@ -122,6 +134,8 @@ class PopulateTasks extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('experience');
+        });
     }
 }
