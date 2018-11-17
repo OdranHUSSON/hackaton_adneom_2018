@@ -24,7 +24,8 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
-            $(document).on("click", ".task", function() {
+            $(document).on("click", ".task", function(event) {
+                event.preventDefault();
                 var flag = "is--done";
                 if($(this).hasClass(flag)) {
                     $.get( "/task/uncheck/"+$(this).attr('task-id'), function() {});

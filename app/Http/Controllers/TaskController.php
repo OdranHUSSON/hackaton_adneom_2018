@@ -20,7 +20,7 @@ class TaskController extends Controller
     public function attachTask($id) {
         $this->middleware('auth');
         $task = tasks::findOrFail($id);
-        
+
         Auth::user()->tasks()->attach($id);
         $user = Auth::user();
         $user->experience += $task->experience;
@@ -56,12 +56,10 @@ class TaskController extends Controller
      */
     protected function executeSuccessFilters(User $user)
     {
-        $notMadeSuccess = Success::whereDoesntHave('users', function($query) use ($user) {
-            $query->where('id', $user->id);
-        })->get();
+        $successList = Success::all();
 
         /** @var Success $success */
-        foreach ($notMadeSuccess as $success) {
+        foreach ($successList as $success) {
             $allFilterPass = true;
 
             foreach ($success->filters as $filter) {
@@ -71,8 +69,14 @@ class TaskController extends Controller
                 }
             }
 
-            if ($allFilterPass) {
+            if ($allFilterPass && !$user->success->contains($success)) {
                 $user->success()->attach($success);
+                $user->experience += $success->xp;
+                $user->save();
+            } else if(!$allFilterPass && $user->success->contains($success)) {
+                $user->success()->detach($success);
+                $user->experience -= $success->xp;
+                $user->save();
             }
         }
     }
@@ -86,9 +90,11 @@ class TaskController extends Controller
     protected function checkSuccessFilter(Filter $filter, User $user)
     {
         $query = $user->tasks()->newQuery();
+        $checkCount = null;
 
         if ($taskCategory = $filter->taskCategory) {
             $query->where('task_category_id', '=', $taskCategory->id);
+            $checkCount = $taskCategory->tasks()->count();
         }
 
         if (!empty($filter->delay)) {
@@ -100,9 +106,9 @@ class TaskController extends Controller
         }
 
         if (!empty($filter->task_count)) {
-            $query->groupBy('id')->having(DB::raw('COUNT(*)'), '>=', $filter->task_count);
+            $checkCount= $filter->task_count;
         }
 
-        return $query->exists();
+        return $checkCount === null ? $query->exists(): $query->count() >= $checkCount;
     }
 }
