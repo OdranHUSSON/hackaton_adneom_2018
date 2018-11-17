@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class Success
@@ -28,15 +29,10 @@ class Success extends Model
     }
 
     /**
-     * @return BelongsToMany
+     * @return HasMany
      */
     public function filters()
     {
-        return $this->belongsToMany(
-            Filter::class,
-            'success_filter',
-            'success_id',
-            'filter_id'
-        )->withTimestamps();
+        return $this->hasMany(Filter::class);
     }
 }

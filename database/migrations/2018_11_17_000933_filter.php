@@ -22,6 +22,9 @@ class Filter extends Migration
             $table->unsignedInteger('task_category_id')->nullable();
             $table->foreign('task_category_id')->references('id')->on('task_category');
 
+            $table->unsignedInteger('success_id')->nullable();
+            $table->foreign('success_id')->references('id')->on('success');
+
             $table->timestamps();
         });
     }
