@@ -28,11 +28,35 @@
                 event.preventDefault();
                 var flag = "is--done";
                 if($(this).hasClass(flag)) {
-                    $.get( "/task/uncheck/"+$(this).attr('task-id'), function() {});
+                    $.get(
+                        "/task/uncheck/"+$(this).attr('task-id'),
+                        function(result) {
+                            result.addedSuccess.forEach(function (success) {
+                                alert('Succès acquis : ' + success.label);
+                            });
+
+                            result.removedSuccess.forEach(function (success) {
+                                alert('Succès perdu : ' + success.label);
+                            });
+                        }
+                    );
+
                     $(this).removeClass(flag);
                 }
                 else {
-                    $.get( "/task/check/"+$(this).attr('task-id'), function() {});
+                    $.get(
+                        "/task/check/"+$(this).attr('task-id'),
+                        function(result) {
+                            result.addedSuccess.forEach(function (success) {
+                                alert('Succès acquis : ' + success.label);
+                            });
+
+                            result.removedSuccess.forEach(function (success) {
+                                alert('Succès perdu : ' + success.label);
+                            });
+                        }
+                    );
+
                     $(this).addClass(flag);
                 }
             })

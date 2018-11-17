@@ -26,10 +26,10 @@ class TaskController extends Controller
         $user->experience += $task->experience;
         $user->save();
 
-        $this->executeSuccessFilters($user);
+        $successResult = $this->executeSuccessFilters($user);
 
-        return response('Ok', 200)
-            ->header('Content-Type', 'text/plain');
+        return response(json_encode($successResult), 200)
+            ->header('Content-Type', 'application/json');
     }
 
     /**
@@ -45,18 +45,21 @@ class TaskController extends Controller
         $user->experience -= $task->experience;
         $user->save();
 
-        $this->executeSuccessFilters($user);
+        $successResult = $this->executeSuccessFilters($user);
 
-        return response('Ok', 200)
-            ->header('Content-Type', 'text/plain');
+        return response(json_encode($successResult), 200)
+            ->header('Content-Type', 'application/json');
     }
 
     /**
      * @param User $user
+     * @return array
      */
     protected function executeSuccessFilters(User $user)
     {
         $successList = Success::all();
+        $removedSuccess = [];
+        $addedSuccess = [];
 
         /** @var Success $success */
         foreach ($successList as $success) {
@@ -73,12 +76,21 @@ class TaskController extends Controller
                 $user->success()->attach($success);
                 $user->experience += $success->xp;
                 $user->save();
+
+                $addedSuccess[] = $success;
             } else if(!$allFilterPass && $user->success->contains($success)) {
                 $user->success()->detach($success);
                 $user->experience -= $success->xp;
                 $user->save();
+
+                $removedSuccess[] = $success;
             }
         }
+
+        return [
+            'addedSuccess' => $addedSuccess,
+            'removedSuccess' => $removedSuccess,
+        ];
     }
 
     /**
