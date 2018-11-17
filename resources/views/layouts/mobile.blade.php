@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="manifest" href="{{ asset('manifest.json') }}" />
     <link href="{{ asset('css/global.css') }}" rel="stylesheet">
     @yield('styles')
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
