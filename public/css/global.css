@@ -8,7 +8,6 @@ body {
   background-attachment: fixed;
   background-size: cover;
   color: #fff;
-  min-height: 100vh;
   padding: 1rem 1rem 0 1rem;
   box-sizing: border-box;
   overflow: hidden;
@@ -54,19 +53,29 @@ img {
   font-feature-settings: 'liga';
 }
 
+#header {
+  display: block;
+  height: 10rem;
+}
+
+#header h1 {
+  padding: 1rem 1rem 0 1rem;
+}
 .navigation-interaction {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 2rem;
+  height: 3rem;
+  z-index: 9000;
+  background: rgba(0,0,0,0.1);
 }
 
 .navigation-interaction a {
   display: inline-block;
-  margin: 1rem 0;
   background-repeat: no-repeat;
   background-size: contain;
+  padding-top:1rem;
   color: #fff;
   overflow: hidden;
 }

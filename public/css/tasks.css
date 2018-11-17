@@ -1,5 +1,7 @@
 #main {
-  padding-top: 6rem;
+  margin-top:-2rem;
+  padding: 1rem 1rem 0 1rem;
+  min-height: 105%;
 }
 
 .content {
@@ -21,13 +23,6 @@
 
 .content .expand i {
   font-size: 2rem;
-}
-
-.content .expand:hover {
-  color: blue;
-}
-.content .expand:focus {
-  color: blue;
 }
 
 .content:before {

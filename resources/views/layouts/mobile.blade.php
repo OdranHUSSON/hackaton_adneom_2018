@@ -14,7 +14,7 @@
 <body>
 <div class="page">
     <div class="navigation-interaction">
-        <a class="back-button" href="#"><i class="material-icons">keyboard_arrow_left</i></a>
+        <a class="back-button" href="/home"><i class="material-icons">keyboard_arrow_left</i></a>
         <a class="settings-button" href="#"><i class="material-icons">more_horiz</i></a>
     </div>
     <header id="header" class="page-title">
@@ -22,9 +22,10 @@
             @yield('page-title')
         </h1>
     </header>
+</div>
     <main id="main">
         @yield('content')
     </main>
-</div>
+
 </body>
 </html>
