@@ -20,19 +20,17 @@ class TaskController extends Controller
     public function attachTask($id) {
         $this->middleware('auth');
         $task = tasks::findOrFail($id);
+        
         Auth::user()->tasks()->attach($id);
         $user = Auth::user();
         $user->experience += $task->experience;
         $user->save();
+
+        $this->executeSuccessFilters($user);
+
         return response('Ok', 200)
             ->header('Content-Type', 'text/plain');
     }
-
-        tasks::findOrFail($id);
-        $user = Auth::user();
-        $user->tasks()->attach($id);
-
-        $this->executeSuccessFilters($user);
 
     /**
      * @param $id
@@ -41,10 +39,14 @@ class TaskController extends Controller
     public function detachTask($id) {
         $this->middleware('auth');
         $task = tasks::findOrFail($id);
+
         Auth::user()->tasks()->detach($id);
         $user = Auth::user();
         $user->experience -= $task->experience;
         $user->save();
+
+        $this->executeSuccessFilters($user);
+
         return response('Ok', 200)
             ->header('Content-Type', 'text/plain');
     }
