@@ -1,35 +1,24 @@
-@extends('layouts.app')
+@extends('layouts.mobile')
+
+@section('page-title')
+    Accueil
+@endsection
+
+@section('page-class')
+    page-eoliene
+@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <p>Catégories</p>
-                    @include('tasks/index')
-                </div>
-
-                <div class="card-body">
-                    <p>Succès</p>
-                    @include('success/index')
-                </div>
-
-                <div class="card-body">
-                    <p>Utilisateurs</p>
-                    @include('user/index')
-                </div>
+    <div class="content is-expanded">
+        @if (session('status'))
+            <div class="alert alert-success" role="alert">
+                {{ session('status') }}
             </div>
-        </div>
+        @endif
+
+        @foreach($taskCategory as $category)
+            <a href="/category/{{ $category->id }}">{{ $category->label }}</a>
+        @endforeach
     </div>
-</div>
+
 @endsection
