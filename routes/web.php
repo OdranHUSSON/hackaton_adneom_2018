@@ -16,11 +16,11 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+//home
 Route::get('/home', 'HomeController@index')->name('home');
-
-
+//users
 Route::get('/me', 'UserController@me')->name('me');
 Route::get('/user/{id}', 'UserController@fetchOne')->name('Show one user');
-
+//tasks
 Route::get('/category/{id}', 'TaskCategoryController@fetchOne')->name('Show one category');
+Route::get('/task/validate/{id}', 'TaskController@attachTask')->name('Validate one task');
