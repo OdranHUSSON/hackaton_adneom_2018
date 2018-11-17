@@ -26,4 +26,17 @@ class Success extends Model
             'users_id'
         )->withTimestamps();
     }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function filters()
+    {
+        return $this->belongsToMany(
+            Filter::class,
+            'success_filter',
+            'success_id',
+            'filter_id'
+        )->withTimestamps();
+    }
 }
