@@ -23,6 +23,28 @@
         </ul>
     </div>
     <script type="text/javascript">
+        function manageTaskResult(result) {
+            var successMessages = result.addedSuccess.map(function (success) {
+                return 'Vous avez déverouillez le succès ' + success.label;
+            });
+
+            var errorMessages = result.removedSuccess.map(function (success) {
+                return 'Vous avez perdu le succès ' + success.label;
+            });
+
+            if (successMessages.length > 0) {
+                var swalPromise = swal('Félicitation !', successMessages.join("<br />"), 'success');
+
+                if (errorMessages.length > 0) {
+                    swalPromise.then(function() {
+                        swal('Mince !', errorMessages.join("<br />"), 'error')
+                    });
+                }
+            } else if (errorMessages.length > 0) {
+                swal('Mince !', errorMessages.join("<br />"), 'error');
+            }
+        }
+
         $(document).ready(function() {
             $(document).on("click", ".task", function(event) {
                 event.preventDefault();
@@ -30,15 +52,7 @@
                 if($(this).hasClass(flag)) {
                     $.get(
                         "/task/uncheck/"+$(this).attr('task-id'),
-                        function(result) {
-                            result.addedSuccess.forEach(function (success) {
-                                alert('Succès acquis : ' + success.label);
-                            });
-
-                            result.removedSuccess.forEach(function (success) {
-                                alert('Succès perdu : ' + success.label);
-                            });
-                        }
+                        manageTaskResult
                     );
 
                     $(this).removeClass(flag);
@@ -46,15 +60,7 @@
                 else {
                     $.get(
                         "/task/check/"+$(this).attr('task-id'),
-                        function(result) {
-                            result.addedSuccess.forEach(function (success) {
-                                alert('Succès acquis : ' + success.label);
-                            });
-
-                            result.removedSuccess.forEach(function (success) {
-                                alert('Succès perdu : ' + success.label);
-                            });
-                        }
+                        manageTaskResult
                     );
 
                     $(this).addClass(flag);
