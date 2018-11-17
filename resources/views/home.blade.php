@@ -1,4 +1,4 @@
-@extends('layouts.mobile')
+@extends('layouts.home')
 
 @section('page-title')
     Accueil
@@ -9,7 +9,8 @@
 @endsection
 
 @section('content')
-    <div class="content is-expanded">
+    <section class="category-index">
+
         @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
@@ -17,8 +18,13 @@
         @endif
 
         @foreach($taskCategory as $category)
-            <a href="/category/{{ $category->id }}">{{ $category->label }}</a>
+                <article class="category">
+                    <a href="/category/{{ $category->id }}" class="link">
+                        <img src="../img/category/1.png" alt="">
+                        <span class="category-label">{{ $category->label }}</span>
+                    </a>
+                </article>
         @endforeach
-    </div>
+    </section>
 
 @endsection

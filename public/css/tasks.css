@@ -4,6 +4,18 @@
   min-height: 105%;
 }
 
+.page-habitation {
+  background-image: url('../img/background-house.jpg');
+}
+
+.page-transport {
+  background-image: url('../img/background-bus.jpg');
+}
+
+.page-achats-alimentaires {
+  background-image: url('../img/background-fruits.jpg');
+}
+
 .content {
   padding: 1rem 0;
   position: relative;

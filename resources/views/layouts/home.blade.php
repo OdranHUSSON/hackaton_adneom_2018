@@ -6,10 +6,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <script src="{{ asset('js/sweetalert2.all.min.js') }}" defer></script>
     <link href="{{ asset('css/global.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/tasks.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+    <title>{{ config('app.name', 'Laravel') }}</title>
 </head>
 <body>
 <div class="page @yield('page-class')">
