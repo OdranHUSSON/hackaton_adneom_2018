@@ -18,7 +18,15 @@
             <button class="material-icons settings-button">more_horiz</button>
             <ul class="dropdown-list">
                 <li><a href="./users.html"><i class="material-icons">account_circle</i>My account</a></li>
-                <li><a href="./logout.html"><i class="material-icons">highlight_off</i>Logout</a></li>
+                <li><a href="./logout.html" ><i class="material-icons">highlight_off</i>Logout</a></li>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                   >
+                    Se Déconnecter
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </ul>
         </div>
     </div>
