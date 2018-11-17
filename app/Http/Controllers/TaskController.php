@@ -71,8 +71,12 @@ class TaskController extends Controller
 
             if ($allFilterPass && !$user->success->contains($success)) {
                 $user->success()->attach($success);
+                $user->experience += $success->xp;
+                $user->save();
             } else if(!$allFilterPass && $user->success->contains($success)) {
                 $user->success()->detach($success);
+                $user->experience -= $success->xp;
+                $user->save();
             }
         }
     }
@@ -86,9 +90,11 @@ class TaskController extends Controller
     protected function checkSuccessFilter(Filter $filter, User $user)
     {
         $query = $user->tasks()->newQuery();
+        $checkCount = null;
 
         if ($taskCategory = $filter->taskCategory) {
             $query->where('task_category_id', '=', $taskCategory->id);
+            $checkCount = $taskCategory->tasks()->count();
         }
 
         if (!empty($filter->delay)) {
@@ -100,9 +106,9 @@ class TaskController extends Controller
         }
 
         if (!empty($filter->task_count)) {
-            $query->groupBy('id')->having(DB::raw('COUNT(*)'), '>=', $filter->task_count);
+            $checkCount= $filter->task_count;
         }
 
-        return $query->exists();
+        return $checkCount === null ? $query->exists(): $query->count() >= $checkCount;
     }
 }
