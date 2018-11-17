@@ -31,7 +31,7 @@
             <div class="progress">
                 <div class="progress-bar" role="progressbar" style="width: {{ $user->experience * 100 / $nextBestRole->required_experience }}%;"></div>
             </div>
-            <span class="progress-number"> {{ $user->experience }}/{{ $nextBestRole->required_experience }} </span>
+            <span class="progress-number"> {{ $user->experience }}/{{ ($nextBestRole->required_experience > 0 ? $nextBestRole->required_experience: 1) }} </span>
         @endif
     </section>
     <section class="content is-expanded">

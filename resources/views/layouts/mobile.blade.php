@@ -23,8 +23,8 @@
         <div class="dropdown">
             <button class="material-icons settings-button">more_horiz</button>
             <ul class="dropdown-list">
-                <li><a href="{{ route('me') }}"><i class="material-icons">account_circle</i>My account</a></li>
-                <li><a href="{{ route('logout') }}"><i class="material-icons">highlight_off</i>Logout</a></li>
+                <li><a href="{{ route('me') }}"><i class="material-icons">account_circle</i>Mon compte</a></li>
+                <li><a href="{{ route('logout') }}"><i class="material-icons">highlight_off</i>Déconnexion</a></li>
             </ul>
         </div>
     </div>
