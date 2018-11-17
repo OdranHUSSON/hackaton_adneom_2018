@@ -29,7 +29,7 @@
         <div class="rank">{{ $currentBestRole ? $currentBestRole->label: 'Aucune rôle actuellement' }}</div>
         @if($nextBestRole)
             <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: {{ $user->experience * 100 / $nextBestRole->required_experience }}%;"></div>
+                <div class="progress-bar" role="progressbar" style="width: {{ $user->experience * 100 / ($nextBestRole->required_experience > 0 ? $nextBestRole->required_experience: 1) }}%;"></div>
             </div>
             <span class="progress-number"> {{ $user->experience }}/{{ ($nextBestRole->required_experience > 0 ? $nextBestRole->required_experience: 1) }} </span>
         @endif
