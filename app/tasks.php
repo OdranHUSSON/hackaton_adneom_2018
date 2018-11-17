@@ -29,12 +29,4 @@ class tasks extends Model
             'users_id'
         )->withTimestamps();
     }
-
-    /**
-     * @return string
-     */
-    public function isDone() {
-
-        return $this->users->contains($this->id) ? "is--done" : "";
-    }
 }

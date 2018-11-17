@@ -1,33 +1,39 @@
-@extends('layouts.app')
+@extends('layouts.mobile')
+
+@section('page-title')
+    {{$taskCategory->label }}
+@endsection
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ $taskCategory->label }}</div>
-
-                    <div class="card-body">
-                        <h1>{{ $taskCategory->label }}</h1>
-                        <p>{{ $taskCategory->description }}</p>
-                        <h2>Tâches de la catégorie</h2>
-
-                        @foreach($taskCategory->tasks as $task)
-                            <li><a href="#" class="task {{ $task->isDone() }}" task-id="{{ $task->id }}">{{ $task->label }} </a></li>
-                        @endforeach
-                    </div>
-                </div>
+    <div class="content is-expanded">
+        <a href="#" class="expand"><i class="material-icons">expand_more</i></a>
+        <div class="category">
+            <div class="category-datas">
+                <h2>{{ $taskCategory->label }}</h2>
+                <span clas="category-description">{{ $taskCategory->description }}</span>
+            </div>
+            <div class="category-image">
+                <img src="../img/themes/recycle.png" alt="">
             </div>
         </div>
+        <ul class="tasks">
+            @foreach($taskCategory->tasks as $task)
+                <li><a href="#" task-id="{{ $task->id }}" class='task {{ $task->isDone }}'>{{ $task->label }}<i class="material-icons">check</i></a></li>
+            @endforeach
+        </ul>
     </div>
     <script type="text/javascript">
         $(document).ready(function() {
             $(document).on("click", ".task", function() {
-                $.get( "/task/check/"+$(this).attr('task-id'), function(data) {
-                    if(data=="Ok") {
-                        $(this).addClass('is--done');
-                    }
-                });
+                var flag = "is--done";
+                if($(this).hasClass(flag)) {
+                    $.get( "/task/uncheck/"+$(this).attr('task-id'), function() {});
+                    $(this).removeClass(flag);
+                }
+                else {
+                    $.get( "/task/check/"+$(this).attr('task-id'), function() {});
+                    $(this).addClass(flag);
+                }
             })
         })
     </script>
