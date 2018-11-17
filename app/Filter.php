@@ -16,4 +16,12 @@ class Filter extends Model
     {
         return $this->belongsTo(Success::class);
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function taskCategory()
+    {
+        return $this->belongsTo(task_category::class);
+    }
 }
